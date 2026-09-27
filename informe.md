@@ -15,10 +15,10 @@ Es un problema de **aprendizaje no supervisado (clustering)**. No hay variable o
 
 ## 2. Datos
 
-- **Fuente:** *Wine Data Set* de UCI (Forina et al.), cargado con `sklearn.datasets.load_wine()` porque no se contó con un CSV de la cátedra.
+- **Fuente:** CSV provisto por la cátedra, `data/raw/wine-clustering.csv`. Es la versión de Kaggle del *Wine Data Set* de UCI (Forina et al.), sin la variedad y con columnas en inglés que se renombran al español. Se verificó que coincide fila a fila con el dataset de UCI.
 - **Tamaño:** 178 vinos × 13 variables numéricas continuas. No hay nulos ni filas duplicadas.
 - **Variables:** Alcohol, Ácido málico, Ceniza, Alcalinidad de la ceniza, Magnesio, Fenoles totales, Flavonoides, Fenoles no flavonoides, Proantocianinas, Intensidad del color, Tono, OD280/OD315 de los vinos diluidos y Prolina.
-- **Etiquetas:** la variedad real (`target`) se separó y se guardó en `data/raw/etiquetas_ocultas.csv`. **No se usó en ninguna decisión**, solo en la validación post-hoc de la sección 7.
+- **Etiquetas:** como el CSV coincide con UCI, la variedad real se tomó de `sklearn.datasets.load_wine()` y se guardó aparte en `data/raw/etiquetas_ocultas.csv`. **No se usó en ninguna decisión**, solo en la validación post-hoc de la sección 7.
 
 ### Hallazgos del análisis exploratorio
 

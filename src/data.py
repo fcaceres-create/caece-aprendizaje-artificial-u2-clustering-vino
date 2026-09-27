@@ -138,18 +138,24 @@ def cargar_vinos(dir_raw: Path = DIR_RAW) -> pd.DataFrame:
     """Carga el dataset de trabajo (178 × 13) SIN la variedad real.
 
     Prioriza un CSV provisto por la cátedra en ``data/raw/``; si no hay, usa
-    ``load_wine()`` de scikit-learn. En ambos casos, si se dispone de la variedad
-    real, se guarda aparte en ``etiquetas_ocultas.csv`` y se descarta del dataframe.
+    ``load_wine()`` de scikit-learn. Si se dispone de la variedad real (en el CSV o,
+    cuando el CSV coincide con UCI, desde scikit-learn), se guarda aparte en
+    ``etiquetas_ocultas.csv`` y nunca forma parte del dataframe de trabajo.
     """
     dir_raw.mkdir(parents=True, exist_ok=True)
     ruta_csv = _csv_de_catedra(dir_raw)
+    wine = load_wine(as_frame=True)
+    variedad_uci = (wine.target + 1).rename("variedad_real")  # variedades 1, 2 y 3 como en UCI
     if ruta_csv is not None:
         atributos, etiqueta = mapear_columnas(pd.read_csv(ruta_csv))
+        # El CSV de la cátedra (Kaggle "wine-clustering") viene sin variedad. Si coincide fila a fila
+        # con el dataset de UCI, la variedad se toma de allí para la validación post-hoc.
+        if etiqueta is None and atributos.shape == wine.data.shape and np.allclose(atributos, wine.data):
+            etiqueta = variedad_uci
     else:
-        wine = load_wine(as_frame=True)
         atributos = wine.data.rename(columns=MAPEO_SKLEARN)[COLUMNAS]
         # La variedad se descarta del dataframe de trabajo (aprendizaje no supervisado).
-        etiqueta = (wine.target + 1).rename("variedad_real")  # variedades 1, 2 y 3 como en UCI
+        etiqueta = variedad_uci
     if etiqueta is not None:
         etiqueta.to_frame().to_csv(ARCHIVO_ETIQUETAS, index=False)
     return atributos.reset_index(drop=True)

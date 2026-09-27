@@ -6,11 +6,21 @@ Trabajo práctico de **aprendizaje no supervisado** de la Unidad 2. Se agrupan l
 - **Informe académico:** [`informe.md`](informe.md).
 - **Resultado:** 3 tipos de vino (k = 3 por consenso de 5 criterios) con K-Means sobre datos estandarizados. Silueta 0,285; estabilidad entre semillas ARI ≥ 0,98; validación post-hoc ARI 0,897 y pureza 96,6 %.
 
+## Cómo verlo sin instalar nada
+
+- **Notebook con salidas y gráficos (recomendado):** [abrir en nbviewer](https://nbviewer.org/github/fcaceres-create/caece-aprendizaje-artificial-u2-clustering-vino/blob/main/notebooks/clustering_vinos.ipynb).
+- **En GitHub:** el [notebook](notebooks/clustering_vinos.ipynb) y el [informe](informe.md) se muestran directamente en el repositorio, con las figuras incluidas.
+- **Para ejecutarlo en Google Colab:** [abrir en Colab](https://colab.research.google.com/github/fcaceres-create/caece-aprendizaje-artificial-u2-clustering-vino/blob/main/notebooks/clustering_vinos.ipynb). Para volver a correrlo, el notebook necesita el paquete `src/`, así que antes hay que ejecutar en una celda nueva al principio:
+  ```python
+  !git clone https://github.com/fcaceres-create/caece-aprendizaje-artificial-u2-clustering-vino.git
+  %cd caece-aprendizaje-artificial-u2-clustering-vino/notebooks
+  ```
+
 ## Estructura
 
 ```
 ├── data/
-│   ├── raw/            # etiquetas_ocultas.csv (variedad real, solo para validación post-hoc)
+│   ├── raw/            # wine-clustering.csv (CSV de la cátedra) + etiquetas_ocultas.csv (solo post-hoc)
 │   └── processed/      # vinos_escalado.csv (StandardScaler)
 ├── notebooks/
 │   └── clustering_vinos.ipynb   # ENTREGABLE PRINCIPAL
@@ -28,7 +38,7 @@ Trabajo práctico de **aprendizaje no supervisado** de la Unidad 2. Se agrupan l
 └── requirements.txt
 ```
 
-**Datos:** si hay un CSV provisto por la cátedra en `data/raw/`, se usa ese archivo. Se aceptan nombres de columna en inglés o en español, con o sin mayúsculas y acentos. Si no hay CSV, se usa `sklearn.datasets.load_wine()`. En ambos casos la variedad real se descarta del análisis y se guarda aparte.
+**Datos:** se usa el CSV provisto por la cátedra, `data/raw/wine-clustering.csv`. Se aceptan nombres de columna en inglés o en español, con o sin mayúsculas y acentos. Si no hubiera CSV, se usaría `sklearn.datasets.load_wine()`. Como el CSV coincide fila a fila con UCI, la variedad real se toma de scikit-learn y se guarda aparte, solo para la validación post-hoc.
 
 ## Instalación y ejecución
 

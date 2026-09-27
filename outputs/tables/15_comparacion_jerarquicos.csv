@@ -1,8 +1,8 @@
 modelo,linkage,métrica,silueta (euclídea),silueta (métrica propia),tamaños,ARI vs. K-Means
-K-Means (k-means++),—,euclidean,0.28485891918989864,0.28485891918989864,"[65, 62, 51]",1.0
-Jerárquico ward (euclidean),ward,euclidean,0.2774439826952266,0.2774439826952266,"[64, 58, 56]",0.8529841218194189
+K-Means (k-means++),—,euclidean,0.2848589191898987,0.2848589191898987,"[65, 62, 51]",1.0
+Jerárquico ward (euclidean),ward,euclidean,0.2774439826952265,0.2774439826952265,"[64, 58, 56]",0.8529841218194189
 Jerárquico complete (euclidean),complete,euclidean,0.20378689690677748,0.20378689690677748,"[69, 58, 51]",0.5958528066846283
-Jerárquico average (euclidean),average,euclidean,0.15752526243774143,0.15752526243774143,"[174, 3, 1]",-0.0016005874270415303
+Jerárquico average (euclidean),average,euclidean,0.15752526243774145,0.15752526243774145,"[174, 3, 1]",-0.0016005874270415303
 Jerárquico single (euclidean),single,euclidean,0.18273797160972796,0.18273797160972796,"[174, 3, 1]",-0.0027686347593179634
 Jerárquico average (manhattan),average,manhattan,0.251940128276972,0.2774560835552922,"[126, 51, 1]",0.4870997033546552
-Jerárquico complete (manhattan),complete,manhattan,0.18992407595052532,0.20232910559089087,"[97, 52, 29]",0.5175751985595287
+Jerárquico complete (manhattan),complete,manhattan,0.1899240759505253,0.20232910559089087,"[97, 52, 29]",0.5175751985595287
