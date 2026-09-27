@@ -1,0 +1,15 @@
+variable 1,variable 2,r
+Fenoles totales,Flavonoides,0.8645635000951147
+Flavonoides,OD280/OD315,0.787193901866951
+Fenoles totales,OD280/OD315,0.6999493647911861
+Flavonoides,Proantocianinas,0.6526917686075153
+Alcohol,Prolina,0.6437200371782134
+Fenoles totales,Proantocianinas,0.6124130837800363
+Tono,OD280/OD315,0.5654682931826589
+Ácido málico,Tono,-0.5612956886649447
+Alcohol,Intensidad del color,0.546364195083705
+Flavonoides,Tono,0.5434785664899897
+Flavonoides,Fenoles no flavonoides,-0.5378996119051984
+Intensidad del color,Tono,-0.5218131932287572
+Proantocianinas,OD280/OD315,0.519067095682523
+Fenoles no flavonoides,OD280/OD315,-0.5032695960789114

@@ -1,0 +1,16 @@
+|                          |   outliers IQR |   outliers |z|>3 |
+|:-------------------------|---------------:|-----------------:|
+| Alcohol                  |              0 |                0 |
+| Ácido málico             |              3 |                1 |
+| Ceniza                   |              3 |                3 |
+| Alcalinidad de la ceniza |              4 |                1 |
+| Magnesio                 |              4 |                2 |
+| Fenoles totales          |              0 |                0 |
+| Flavonoides              |              0 |                1 |
+| Fenoles no flavonoides   |              0 |                0 |
+| Proantocianinas          |              2 |                1 |
+| Intensidad del color     |              4 |                1 |
+| Tono                     |              1 |                1 |
+| OD280/OD315              |              0 |                0 |
+| Prolina                  |              0 |                0 |
+| Total (filas distintas)  |             17 |               10 |
