@@ -17,6 +17,8 @@ Trabajo práctico de **aprendizaje no supervisado** de la Unidad 2. Se agrupan l
 
 ## Cómo verlo sin instalar nada
 
+- **🍷 Laboratorio web interactivo:** https://clustering-vinos-caece.streamlit.app
+
 - **Notebook con salidas y gráficos (recomendado):** [abrir en nbviewer](https://nbviewer.org/github/fcaceres-create/caece-aprendizaje-artificial-u2-clustering-vino/blob/main/notebooks/clustering_vinos.ipynb).
 - **En GitHub:** el [notebook](notebooks/clustering_vinos.ipynb) y el [informe](informe.md) se muestran directamente en el repositorio, con las figuras incluidas.
 - **Para ejecutarlo en Google Colab:** [abrir en Colab](https://colab.research.google.com/github/fcaceres-create/caece-aprendizaje-artificial-u2-clustering-vino/blob/main/notebooks/clustering_vinos.ipynb). Para volver a correrlo, el notebook necesita el paquete `src/`, así que antes hay que ejecutar en una celda nueva al principio:
