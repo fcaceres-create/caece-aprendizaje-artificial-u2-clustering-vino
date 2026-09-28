@@ -1,5 +1,14 @@
 # Clustering de vinos — Aprendizaje Artificial (Maestría en IA, CAECE)
 
+| | |
+|---|---|
+| **Universidad** | Universidad CAECE |
+| **Materia** | Aprendizaje Artificial — Maestría en Inteligencia Artificial |
+| **Unidad** | 2: Clasificación, Clustering y Reglas de Asociación |
+| **Alumno** | Fernando Cáceres |
+| **Profesores** | Juan Azcurra y Pablo Hernán Paul |
+| **Fecha** | 09/2026 |
+
 Trabajo práctico de **aprendizaje no supervisado** de la Unidad 2. Se agrupan los 178 vinos tintos del *Wine Data Set* de UCI a partir de sus 13 variables químicas, sin usar la variedad real, y se nombran los tipos de vino encontrados.
 
 - **Entregable principal:** [`notebooks/clustering_vinos.ipynb`](notebooks/clustering_vinos.ipynb). Narrativa, código y gráficos siguiendo CRISP-DM.

@@ -31,6 +31,8 @@ from src import interpretation as it  # noqa: E402
 from src import preprocessing as pp  # noqa: E402
 from src.data import COLUMNAS, DIR_RAW, SEMILLA, leer_vinos  # noqa: E402
 
+CREDITOS = {"Universidad": "Universidad CAECE", "Materia": "Aprendizaje Artificial",
+            "Alumno": "Fernando Cáceres", "Profesores": "Juan Azcurra y Pablo Hernán Paul", "Fecha": "09/2026"}
 REPO = "https://github.com/fcaceres-create/caece-aprendizaje-artificial-u2-clustering-vino"
 NBVIEWER = ("https://nbviewer.org/github/fcaceres-create/caece-aprendizaje-artificial-u2-clustering-vino"
             "/blob/main/notebooks/clustering_vinos.ipynb")
@@ -45,6 +47,9 @@ st.markdown("""
            color: #fff; padding: 1.4rem 1.8rem; border-radius: 14px; margin-bottom: 1rem;}
 .cabecera h1 {color: #fff; margin: 0; font-size: 2rem;}
 .cabecera p {color: #f3dde2; margin: .3rem 0 0 0;}
+.creditos {display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; margin-top: .8rem; padding-top: .7rem;
+           border-top: 1px solid rgba(255, 255, 255, .25); font-size: .9rem; color: #fff;}
+.creditos span b {color: #f3dde2; font-weight: 600;}
 div[data-testid="stMetric"] {background: #fbf5f6; border: 1px solid #ecd9dd; border-radius: 12px;
                              padding: .7rem 1rem;}
 .ficha {border-left: 6px solid var(--c); background: #fbf8f8; border-radius: 10px;
@@ -179,7 +184,8 @@ def generar_informe(cfg: dict, r: dict, post: dict | None, df: pd.DataFrame) -> 
     tk, k = r["tabla_k"], r["k"]
     lineas = [
         "# Clustering de vinos: informe generado",
-        f"*Generado el {date.today():%d/%m/%Y} desde la app web del trabajo práctico (Aprendizaje Artificial, CAECE).*\n",
+        "\n".join(f"**{clave}:** {valor}  " for clave, valor in CREDITOS.items()) + "\n",
+        f"*Generado el {date.today():%d/%m/%Y} desde la app web del trabajo práctico.*\n",
         "## Configuración utilizada\n",
         "| Decisión | Elección |", "|---|---|",
         f"| Datos | {cfg['fuente']} ({df.shape[0]} vinos{', con ediciones manuales' if cfg['editado'] else ''}) |",
@@ -263,7 +269,9 @@ with st.sidebar:
 # Cabecera y solapas
 # ---------------------------------------------------------------------------
 st.markdown("""<div class="cabecera"><h1>Clustering de vinos tintos</h1>
-<p>Aprendizaje no supervisado sobre 13 variables químicas · Aprendizaje Artificial · Maestría en IA (CAECE)</p></div>""",
+<p>Aprendizaje no supervisado sobre 13 variables químicas · Unidad 2: Clustering</p><div class="creditos">"""
+            + "".join(f"<span><b>{clave}:</b> {valor}</span>" for clave, valor in CREDITOS.items())
+            + "</div></div>",
             unsafe_allow_html=True)
 zona_metricas = st.container()
 (t_resumen, t_datos, t_prep, t_k, t_modelo, t_alg, t_tipos, t_post) = st.tabs([

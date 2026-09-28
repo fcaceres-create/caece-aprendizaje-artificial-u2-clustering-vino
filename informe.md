@@ -1,9 +1,13 @@
 # Clustering de vinos: descubrimiento y caracterización de tipos de vino tinto
 
-**Materia:** Aprendizaje Artificial — Maestría en Inteligencia Artificial (CAECE)
-**Unidad 2:** Clasificación, Clustering y Reglas de Asociación
-**Docentes:** Juan Azcurra y Pablo Hernán Paul
-**Fecha:** septiembre de 2026
+| | |
+|---|---|
+| **Universidad** | Universidad CAECE |
+| **Materia** | Aprendizaje Artificial — Maestría en Inteligencia Artificial |
+| **Unidad** | 2: Clasificación, Clustering y Reglas de Asociación |
+| **Alumno** | Fernando Cáceres |
+| **Profesores** | Juan Azcurra y Pablo Hernán Paul |
+| **Fecha** | 09/2026 |
 
 ---
 
