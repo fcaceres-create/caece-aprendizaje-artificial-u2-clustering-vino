@@ -13,6 +13,12 @@ from sklearn.metrics import adjusted_rand_score, normalized_mutual_info_score
 from .eda import dibujar_boxplot, dibujar_heatmap
 
 PALETA = {1: "#7b2d3b", 2: "#d98c2b", 3: "#4f8fbf"}
+_PALETA_EXTRA = ["#5b8c5a", "#8e6bb5", "#c9657f", "#6b6b6b", "#b8a03a", "#3fa7a0", "#e07a5f", "#264653"]
+
+
+def color_cluster(c: int) -> str:
+    """Color fijo por ID de cluster (los tres primeros son los de la solución principal)."""
+    return PALETA.get(c, _PALETA_EXTRA[(c - 4) % len(_PALETA_EXTRA)])
 
 
 # ---------------------------------------------------------------------------
@@ -90,14 +96,14 @@ def graficar_boxplots_por_cluster(df: pd.DataFrame, etiquetas: np.ndarray, varia
     fig, ejes = plt.subplots(2, 3, figsize=(16, 9))
     for eje, var in zip(ejes.flat, variables):
         dibujar_boxplot(eje, [df.loc[etiquetas == c, var] for c in clusters], [f"C{c}" for c in clusters],
-                        [PALETA[c] for c in clusters])
+                        [color_cluster(c) for c in clusters])
         eje.set_title(var)
         eje.set_xlabel("Cluster")
         eje.set_ylabel(f"{var} (unidades originales)")
     if nombres:
-        manijas = [plt.Rectangle((0, 0), 1, 1, color=PALETA[c]) for c in sorted(nombres)]
+        manijas = [plt.Rectangle((0, 0), 1, 1, color=color_cluster(c)) for c in sorted(nombres)]
         fig.legend(manijas, [f"C{c}: {nombres[c]}" for c in sorted(nombres)], loc="lower center",
-                   ncol=len(nombres), frameon=False, fontsize=11)
+                   ncol=min(len(nombres), 3), frameon=False, fontsize=11)
     fig.suptitle("Las 6 variables más discriminantes, por cluster", fontsize=15)
     fig.tight_layout(rect=(0, 0.05, 1, 0.97))
     return fig
@@ -123,7 +129,7 @@ def graficar_pca(pca: PCA, proyecciones: pd.DataFrame, loadings: pd.DataFrame, e
     for c in sorted(np.unique(etiquetas)):
         m = etiquetas == c
         eje.scatter(proyecciones.loc[m, "PC1"], proyecciones.loc[m, "PC2"], s=40, alpha=0.75,
-                    color=PALETA.get(c), label=f"C{c}: {nombres.get(c, c)} (n={m.sum()})")
+                    color=color_cluster(c), label=f"C{c}: {nombres.get(c, c)} (n={m.sum()})")
     if centroides_escalados is not None:
         cp = pca.transform(pd.DataFrame(centroides_escalados, columns=loadings.index))
         eje.scatter(cp[:, 0], cp[:, 1], s=350, marker="X", color="black", edgecolor="white",
@@ -243,6 +249,31 @@ def fichas_tipos(centroides: pd.DataFrame, perfiles: pd.DataFrame, media_global:
     return dict(sorted(fichas.items()))
 
 
+def nombre_generico(perfil: pd.Series, n: int = 3) -> str:
+    """Nombre descriptivo a partir de las ``n`` variables más alejadas de la media (para k ≠ 3)."""
+    top = perfil.abs().sort_values(ascending=False).head(n).index
+    return "Perfil " + ", ".join(f"{'↑' if perfil[v] > 0 else '↓'} {v}" for v in top)
+
+
+def fichas_genericas(centroides: pd.DataFrame, perfiles: pd.DataFrame, media_global: pd.Series) -> dict[int, dict]:
+    """Fichas automáticas para cualquier k: variables más distintivas del cluster con sus valores."""
+    fichas = {}
+    for c in perfiles.index:
+        z = perfiles.loc[c]
+        top = z.abs().sort_values(ascending=False).head(5).index
+        quimica = [f"{v} {_fmt(centroides.loc[c, v])} (media global {_fmt(media_global[v])}; z = {_fmt(z[v])})"
+                   for v in top]
+        altos = [v for v in top if z[v] > 0]
+        bajos = [v for v in top if z[v] < 0]
+        descripcion = ("Se distingue por valores altos de " + (", ".join(altos) if altos else "—")
+                       + " y bajos de " + (", ".join(bajos) if bajos else "—")
+                       + ". Nombre generado automáticamente: la regla enológica de nombres está definida para k = 3.")
+        fichas[int(c)] = {"nombre": nombre_generico(z), "arquetipo": "genérico", "perfil químico": quimica,
+                          "descripción": descripcion, "perfil sensorial (inferido)": "—",
+                          "uso comercial (inferido)": "—"}
+    return fichas
+
+
 def fichas_a_markdown(fichas: dict[int, dict], tamanos: pd.Series) -> str:
     """Convierte las fichas de los tipos de vino a texto Markdown."""
     partes = []
@@ -290,7 +321,7 @@ def graficar_pca_clusters_vs_real(proyecciones: pd.DataFrame, etiquetas: np.ndar
             c = g if prefijo == "Cluster" else correspondencia[g]
             sufijo = "" if prefijo == "Cluster" else f", ≈ Cluster {c}"
             eje.scatter(proyecciones.loc[m, "PC1"], proyecciones.loc[m, "PC2"], s=40, alpha=0.75,
-                        color=PALETA.get(c), label=f"{prefijo} {g} (n={m.sum()}{sufijo})")
+                        color=color_cluster(c), label=f"{prefijo} {g} (n={m.sum()}{sufijo})")
         errores = None
         if prefijo == "Variedad":
             errores = etiquetas != _alinear(etiquetas, real)

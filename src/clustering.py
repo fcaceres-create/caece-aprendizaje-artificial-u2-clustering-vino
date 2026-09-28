@@ -163,9 +163,12 @@ def graficar_dendrograma(Z: np.ndarray, umbral: float, k: int, titulo: str) -> p
 def resumen_eleccion_k(tabla: pd.DataFrame, k_codo: int, saltos: pd.DataFrame) -> pd.DataFrame:
     """Tabla 'criterio vs. k sugerido' para fundamentar la decisión final."""
     candidatos = tabla.dropna(subset=["silueta"])
+    reduccion = tabla["reducción % vs k-1"]
+    evidencia_codo = f"reducción de {reduccion[k_codo]:.1f}% al pasar a k={k_codo}"
+    if k_codo + 1 in reduccion.index:
+        evidencia_codo += f" y de {reduccion[k_codo + 1]:.1f}% al siguiente"
     filas = [
-        ("Método del codo (WCSS)", k_codo, f"reducción de {tabla.loc[k_codo, 'reducción % vs k-1']:.1f}% "
-         f"al pasar a k={k_codo} y de {tabla.loc[k_codo + 1, 'reducción % vs k-1']:.1f}% al siguiente"),
+        ("Método del codo (WCSS)", k_codo, evidencia_codo),
         ("Silueta promedio (máx.)", int(candidatos["silueta"].idxmax()),
          f"s = {candidatos['silueta'].max():.3f}"),
         ("Calinski-Harabasz (máx.)", int(candidatos["Calinski-Harabasz"].idxmax()),

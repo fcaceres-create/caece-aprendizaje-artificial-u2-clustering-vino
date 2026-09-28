@@ -16,6 +16,30 @@ Trabajo práctico de **aprendizaje no supervisado** de la Unidad 2. Se agrupan l
   %cd caece-aprendizaje-artificial-u2-clustering-vino/notebooks
   ```
 
+## Laboratorio web interactivo (Streamlit)
+
+[`app.py`](app.py) es una web con solapas (Resumen, Datos y EDA, Preparación, Elección de k, Modelo y estabilidad, Comparar algoritmos, Tipos de vino y Validación post-hoc) para experimentar con el trabajo:
+
+- **Datos:** usar el CSV de la cátedra, el dataset de UCI o subir un CSV propio; editar valores en la tabla; elegir qué variables se usan para clusterizar.
+- **Parámetros:** escalado, tratamiento de outliers, k (automático por consenso o manual), algoritmo (K-Means o jerárquico con distintos linkage y distancias), `init`, `n_init`, `max_iter` y semilla.
+- **Informe recreado:** todos los textos se generan a partir de los resultados. Se puede descargar un informe en Markdown con la configuración actual y el CSV de vinos con su cluster.
+- Botón para abrir el **notebook original en nbviewer**.
+
+Para correrla en tu equipo (con el entorno ya instalado):
+
+```bash
+streamlit run app.py
+```
+
+Se abre en http://localhost:8501.
+
+**Publicarla gratis en Streamlit Community Cloud:**
+
+1. Entrar a https://share.streamlit.io con la cuenta de GitHub.
+2. *Create app* → *Deploy a public app from GitHub*. Repositorio: `fcaceres-create/caece-aprendizaje-artificial-u2-clustering-vino`, rama `main`, archivo `app.py`.
+3. En *Advanced settings*, elegir la versión de Python más nueva disponible.
+4. *Deploy*. Cada push a `main` actualiza la app automáticamente.
+
 ## Estructura
 
 ```
@@ -34,6 +58,8 @@ Trabajo práctico de **aprendizaje no supervisado** de la Unidad 2. Se agrupan l
 ├── outputs/
 │   ├── figures/        # PNG a 150 dpi
 │   └── tables/         # CSV + Markdown
+├── app.py            # laboratorio web interactivo (Streamlit)
+├── .streamlit/       # tema visual de la app
 ├── informe.md
 └── requirements.txt
 ```
